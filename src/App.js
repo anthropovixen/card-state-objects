@@ -1,6 +1,8 @@
 import React from "react";
 import userimage from "./images/user.png";
 import starimage from "./images/star-empty.png";
+import starimageyellow from "./images/star-filled.png";
+
 import "./App.css";
 
 export default function App() {
@@ -9,16 +11,18 @@ export default function App() {
     lastName: "Doe",
     phone: "+1 (719) 555-1212",
     email: "itsmyrealname@example.com",
-    isFavorite: false,
+    isFavorite: true,
   });
-  /**
-   * Challenge: Fill in the values in the markup
-   * using the properties of our state object above
-   * (Ignore `isFavorite` for now)
-   */
+
+  let starIcon = contact.isFavorite ? starimageyellow : starimage;
 
   function toggleFavorite() {
-    console.log("Toggle Favorite");
+    setContact((prevContact) => {
+      return {
+        ...prevContact,
+        isFavorite: !contact.isFavorite,
+      };
+    });
   }
 
   return (
@@ -27,7 +31,7 @@ export default function App() {
         <img src={userimage} className="card--image" alt="user" />
         <div className="card--info">
           <img
-            src={starimage}
+            src={starIcon}
             className="card--favorite"
             onClick={toggleFavorite}
             alt="star"
